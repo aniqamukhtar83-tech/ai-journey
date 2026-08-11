@@ -1,0 +1,197 @@
+#----oop concepts------classes, methods ko call krny k liye objects bnaty
+class car:
+    def drive(self):
+        print("the car is moving")
+car1 = car()
+car1.drive()
+#-------------------------------#
+class car:
+    color= "red"
+    def drive(self):
+        print(f"{self.color} car is moving")
+car1 = car()
+car1.drive()
+#-----------------------#
+class car:
+    color= "red"
+    def drive(self):
+        print(f"{self.color} car is moving")
+    def set_color(self,new_color):
+        self.color= new_color
+car2 = car()
+car2.set_color("pink")
+car2.drive()
+#constructor init 
+class cat:
+    def __init__(self,color,voice):
+        self.color = color
+        self.voice = voice
+    def meow(self):
+        print(f"{self.color} cat says {self.voice}")
+cat1 =cat("white","meow , meow")
+cat1.meow()
+#-------------------------------#
+class student():
+    def __init__(self,name,age,grade):
+        self.name = name
+        self.age = age
+        self.grade = grade
+    def display_info(self):
+        print (f"student name is : {self.name}")
+        print (f"student age is : {self.age}")
+        print (f"student grade is : {self.grade}")
+    def is_eligible(self):
+        if self.age >=20:
+            print("student is eligible")
+        else:
+            print("student is not eligible")
+student1 = student("aniqa" , 21 , "A")
+student1.display_info()
+student1.is_eligible()
+
+#private attribute __ use as in synatx-----------getter/setter
+class employes:
+    def __init__(self,name,post,salary):
+        self.name= name
+        self.post = post
+        self.salary = salary
+    def display_data(self):
+        print(f"name of employee is : {self.name}")
+        print(f"post of employee is : {self.post}")
+        print(f"salry of employee is : {self.salary}")
+emp=employes("aniqa","hr","60,000")
+emp.display_data()
+#----------private attribute get-------
+class employes:
+    def __init__(self,name,post,salary):
+        self.name= name
+        self.post = post
+        self.__salary = salary
+    def get_salary(self):
+        return self.__salary
+    def display_data(self):
+        print(f"name of employee is : {self.name}")
+        print(f"post of employee is : {self.post}")
+        print(f"salry of employee is : {self.__salary}")
+emp=employes("Ali","manager","50,000")
+emp.display_data()
+emp.get_salary()
+# -----also use set method to change the salary --------
+class employes:
+    def __init__(self,name,post,salary):
+        self.name= name
+        self.post = post
+        self.__salary = salary
+    def get_salary(self):
+        return self.__salary
+    def set_salary(self,salary):
+         self.__salary= salary
+    def display_data(self):
+        print(f"name of employee is : {self.name}")
+        print(f"post of employee is : {self.post}")
+        print(f"salry of employee is : {self.__salary}")
+emp=employes("Ali","manager","50,000")
+emp.display_data()
+emp.get_salary()
+emp.set_salary(70000)
+#-------------inheritance---------------
+class animals():
+    def sound(self,sound):
+        self.sound = sound
+        print(f" sound of animal is :{self.sound}")
+class cat(animals):  #inherit animal class 
+    def features(self,color,size):
+        self.color= color
+        self.size= size
+    def display(self):
+        print(f"color of cat is :{self.color}")
+        print(f"size of cat is :{self.size}")
+cat =cat()
+cat.features("white","small")
+cat.sound("meow , meow")
+cat.display()
+#--------------------------#
+class Animal:         #multilevel 
+    def eat(self):
+        print("Animal is eating")
+class Dog(Animal):
+    def bark(self):
+        print("Dog is barking")
+class Puppy(Dog):
+    def play(self):
+        print("Puppy is playing")
+p = Puppy()
+p.eat()
+p.bark()
+p.play()
+#------------------#
+class Animal:       # hierarical 
+    def eat(self):
+        print("Animal is eating")
+class Dog(Animal):
+    def bark(self):
+        print("Dog is barking")
+class Cat(Animal):
+    def meow(self):
+        print("Cat is meowing")
+dog = Dog()
+cat = Cat()
+dog.eat()
+dog.bark()
+cat.eat()
+cat.meow()
+#----------super()---------------
+class Person:
+    def __init__(self, name):
+        self.name = name
+class Student(Person):
+    def __init__(self, name, roll_no):
+        super().__init__(name)
+        self.roll_no = roll_no
+s = Student("Ali", 101)
+print(s.name)
+print(s.roll_no)
+#------------overriding----------
+# same method create in the parent class
+class Animal:
+    def sound(self):
+        print("Animal makes a sound")
+class Dog(Animal):
+    def sound(self):
+        print("Dog barks")
+class Cat(Animal):
+    def sound(self):
+        print("Cat meows")
+dog = Dog()
+cat = Cat()
+dog.sound()
+cat.sound()
+#-----------polymorphism------------
+class Car:
+    def move(self):
+        print("Car is driving")
+class Boat:
+    def move(self):
+        print("Boat is sailing")
+class Plane:
+    def move(self):
+        print("Plane is flying")
+for vehicle in [Car(), Boat(), Plane()]:
+    vehicle.move()
+
+ #------------------#
+class Calculator:          #overloading
+    def add(self, a, b=0, c=0):
+        return a + b + c
+calc = Calculator()
+print(calc.add(5))
+print(calc.add(5, 10))
+print(calc.add(5, 10, 15))
+#-----------using args*-----------------
+class Calculator:
+    def add(self, *numbers):
+        return sum(numbers)
+calc = Calculator()
+print(calc.add(5, 10))
+print(calc.add(5, 10, 15))
+print(calc.add(1, 2, 3, 4, 5))
