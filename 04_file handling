@@ -1,0 +1,115 @@
+#--------file handling------------
+file = open("data.text", "w")          #write
+file.write("Hello! I am learning File Handling.")
+
+
+file = open("data.text" , "r")       #read
+print(file.read())
+file.close()
+
+
+file = open("data.text", "a")
+file.write("\ new line added")
+16
+file.close()
+
+
+# -------------using context manager-----------(with),(open),(temp file),(zip file),(pathlib)
+#with open---file automatically close ho jati hai -------------------------------
+
+with open("data.text", "r") as file:   #with
+    print(file.read())
+
+with open("data.text", "w") as file:   #open
+    file.write("new lineeeeeeeeee is added")
+
+
+#temporary file------
+import tempfile
+with tempfile.TemporaryFile(mode="w+") as file:
+    file.write("Temporary data")
+    file.seek(0)  #go to line 1 we wanna read
+    print(file.read())
+
+
+#zip file read/extract data------------
+#import zipfile
+#with zipfile.ZipFile("myfiles.zip", "r") as zip_file:
+   # zip_file.extractall("extracted") 
+# if not present exception handle ----------
+import zipfile
+try:
+    with zipfile.ZipFile("myfiles.zip", "r") as zip_file:
+        zip_file.extractall("extracted")
+except FileNotFoundError:
+    print("ZIP file not found!")
+except zipfile.BadZipFile:
+    print("The file is not a valid ZIP file!")
+
+
+
+#pathlib--------path ko handle krna 
+from pathlib import Path
+file_path = Path("data.txt")
+print(file_path.exists())     #if file exist true else false
+
+
+
+  #exception handling 
+
+try:
+    file = open("data.txt", "r")
+    content = file.read()
+    print(content)
+    file.close()
+except FileNotFoundError:
+    print("File does not exist.")
+
+# with open 
+try:
+    with open("data.txt", "r") as file:
+        content = file.read()
+        print(content)
+except FileNotFoundError:
+    print("File not found!")
+
+# if file not exist create new one 
+try:
+    with open("data.txt", "r") as file:
+        print(file.read())
+except FileNotFoundError:
+    print("File not found! Creating a new file...")
+    with open("data.txt", "w") as file:
+        file.write("This is my new file.")
+    print("File created successfully!")
+
+#----------------------------#
+#num = int(input("enter a number here:"))
+#print(num/0)  #no number can be divided by zero so it will give zerodivision error
+
+#we use try exception--------
+try:
+    num = int(input("enter a number here:"))
+    print(num/0)
+except ZeroDivisionError:
+    print("cant divide bt zero")
+except ValueError:
+    print("cant take this input")
+except Exception as e:
+    print(f"unexpected error : {e}")
+
+#-------we can create our own error
+age= -3
+if age < 0:
+    raise ValueError("age can not be negative")  #raising exception
+
+#custom error
+class AgeError(Exception):
+    pass
+try:
+    age = int(input("Enter your age: "))
+    if age < 18:
+        raise AgeError("Age must be 18 or above.")
+    print("You are eligible.")
+except AgeError as e:
+    print("Error:", e)
