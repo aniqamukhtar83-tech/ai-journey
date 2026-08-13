@@ -1,0 +1,110 @@
+#---------------------pandas   library-------------------
+
+import pandas as pd
+data = {
+    "Name": ["Ali", "aniqa", "frwa"],
+    "Age": [20, 21, 19],
+    "Marks": [85, 90, 78]
+}
+df = pd.DataFrame(data)
+print(df)
+##------------------series create--------------------
+import pandas as pd
+s= pd.Series([10,20,30,40,50],index=['a','b','c','d','e'])
+print(s)
+#-----------------------
+import pandas as pd
+marks = [85, 90, 78, 92]
+s = pd.Series(marks, index=["Ali", "Sara", "Ahmed", "Ayesha"])
+print(s)
+print(s["Sara"])
+#------series from dictionary-------------
+import pandas as pd
+marks = {
+    "Ali": 85,
+    "Sara": 90,
+    "Ahmed": 78,
+    "Ayesha": 92
+}
+s = pd.Series(marks)
+print(s)
+#------------------------data frme-----------------
+import pandas as pd
+data = {
+    "Name": ["Aniqa", "Sara", "Ahmed"],
+    "Age": [20, 21, 19],
+    "Marks": [85, 90, 78]
+}
+df = pd.DataFrame(data)
+print(df)
+print(df["Name"])      #column access
+print(df[["Name", "Marks"]])    #multiple
+print(df.loc[0])         # rows
+print(df.iloc[0])         #through position
+print(df.iloc[0, 2])      #specifice value 
+
+df["Grade"] = ["A", "A+", "B"]        #clm add
+print(df)
+
+print(df.tail())
+print(df.head())
+print(df.shape)
+print(df.columns)
+print(df.info())
+print(df.describe())
+
+
+#------------some file ko import kr k data info save krna 
+#import pandas as pd
+#df = pd.read_csv("retail sales file ")
+#print(df.info())      # we have np current file 
+#---------------------------------------------------------------
+
+import pandas as pd
+data = {
+    "Name": ["nikku", "hoor", "Ali", "hassan"],
+    "Age": [20, 21, 19, 22],
+    "Marks": [85, 92, 76, 88]
+}
+df = pd.DataFrame(data)
+print(df)
+print(df["Marks"])
+print(df.iloc[1])
+print(df.shape)
+print(df.columns)
+#-------------------update-------------------
+import pandas as pd
+data = {
+    "Name": ["Ali", "Sara", "Ahmed"],
+    "Age": [20, 21, 19],
+    "Marks": [85, 90, 78]
+}
+df = pd.DataFrame(data)
+print(df)
+df.loc[1, "Marks"] = 95        #update marks
+print(df)
+
+df.loc[df["Marks"] < 80, "Marks"] = 80       #condition basis------
+print(df)
+
+
+#-------------json, csv files , excel files====import export in pandas---------------
+import pandas as pd
+data = {
+    "Name": ["sonia", "Saim", "Ahmerrr"],
+    "Age": [20, 21, 19],
+    "Marks": [85, 90, 78]
+}
+df = pd.DataFrame(data)
+#-------------------automatically create ho jyn gi---------------------------
+df.to_csv("students.csv", index=False)          #export to csv
+df.to_excel("students.xlsx", index=False)            #excel
+df.to_json("students.json", orient="records", indent=4)          # json
+
+#--------------readdddddddd them-------------
+import pandas as pd
+df = pd.read_csv("students.csv")
+df = pd.read_excel("students.xlsx")
+df = pd.read_json("students.json")
+print(df)
+
