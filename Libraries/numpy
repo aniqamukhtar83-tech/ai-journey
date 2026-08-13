@@ -1,0 +1,80 @@
+#---------libraries in python-----------
+#numpy
+import numpy as np
+import time
+arr=np.array([[1,2,3],[4,5,6]])
+print(arr.shape)  #rows /  columns
+print(arr.ndim) 
+print(arr.dtype)
+
+#------------------#
+import numpy as np
+import time
+numbers = np.array([10, 20, 30, 40, 50])
+print(numbers)
+print(numbers * 2)
+print(numbers.mean())
+
+#----------array create-------------
+arr=np.array([8,9,0])
+print(arr)
+#---------------functions--------
+import numpy as np
+
+print(np.zeros((3, 2)))       #np.zeros make matrix 2 rows 3 columns 
+print(np.ones((3, 4)))        #np.ones 
+print(np.full((2, 3), 8))      #2,3 is size     8=value initilize
+print(np.arange(0, 10, 2))       #even no print except 10 start zero
+print(np.linspace(0,1,5))        #linear space 5 steps create between 0-1
+print(np.eye(3))           #matrix 3*3 non diagonal values zero
+print(np.diag([1, 2, 3]))      
+
+#---------index , slicing , ----------------
+import numpy as np
+arr = np.array([
+    [1, 2, 3, 4],
+    [2, 3, 4, 5],
+    [7, 8, 9, 0]
+])
+print(arr[0, 1])    #access row 0,clm 1 element
+print(arr[2, 2])
+print(arr[-2, -2])      #2nd last row / column
+print(arr[0:1, 2:3])   #portion print
+#------------slicing--------------change
+slice_arr= arr[0, :2]
+slice_arr[0] = 999
+print(arr[0])
+#----------random numbers vactorization-------------------
+import numpy as np              #Random number generate karna
+num = np.random.rand()
+print(num)
+#-----------Multiple random numbers---------
+import numpy as np
+numbers = np.random.rand(5)
+print(numbers)
+#---------------Random integers---------------
+import numpy as np
+numbers = np.random.randint(1,10,5)   #between 1-10 
+print(numbers)
+#------------2d matrix---------------
+import numpy as np
+matrix = np.random.randint(1, 100, size=(3, 4))
+print(matrix)
+#------------random name select---------
+import numpy as np
+names = np.array(["Ali", "Sara", "Aniqa", "Ayesha"])
+print(np.random.choice(names))
+#------------------without seed mean same code give different random numbers------
+import numpy as np
+print(np.random.randint(1, 100, 5))
+print(np.random.randint(1, 100, 5))
+#----------with seed same output------------
+import numpy as np
+np.random.seed(42)
+print(np.random.randint(1, 100, 5))
+#------------vectorization------------------
+import numpy as np
+numbers = np.array([1, 2, 3, 4, 5])
+result = numbers * 2
+print(result)
+###-----Sum = np.sum(),  Average = np.mean(),  Maximum = np.max() , Minimum =np.min()---------
