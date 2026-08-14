@@ -1,0 +1,97 @@
+students_data = [
+    {"id": 1, "name": "aniqa", "grade": "A", "age": 21},
+    {"id": 2, "name": "frwa", "grade": "A", "age": 22},
+    {"id": 3, "name": "nimra", "grade": "C", "age": 24},
+    {"id": 4, "name": "hoor", "grade": "B", "age": 25},
+    {"id": 5, "name": "mirha", "grade": "B", "age": 20}
+]
+# Display Student
+def display_student():
+    for student in students_data:
+        print(
+            f"ID: {student['id']} | "
+            f"Name: {student['name']} | "
+            f"Grade: {student['grade']} | "
+            f"Age: {student['age']}"
+        )
+# Add Student
+def add_student():
+    student_id = int(input("Enter ID: "))
+    name = input("Enter name: ")
+    grade = input("Enter grade: ")
+    age = int(input("Enter age: "))
+    student = {
+        "id": student_id,
+        "name": name,
+        "grade": grade,
+        "age": age
+    }
+    students_data.append(student)
+    print("Student added successfully!")
+# Search Student
+def search_student():
+    student_id = int(input("Enter ID: "))
+    found = False
+    for student in students_data:
+        if student["id"] == student_id:
+            print(
+                f"ID: {student['id']} | "
+                f"Name: {student['name']} | "
+                f"Grade: {student['grade']} | "
+                f"Age: {student['age']}"
+            )
+            found = True
+            break
+    if found == False:
+        print("Student not found!")
+# Update Student
+def update_student():
+    student_id = int(input("Enter student ID: "))
+    for student in students_data:
+        if student["id"] == student_id:
+            new_name = input("Enter new name: ")
+            new_grade = input("Enter new grade: ")
+            new_age = int(input("Enter new age: "))
+            student["name"] = new_name
+            student["grade"] = new_grade
+            student["age"] = new_age
+            print("Student updated successfully!")
+            break
+    else:
+        print("Student not found!")
+# Delete Student
+def delete_student():
+    student_id = int(input("Enter student ID: "))
+    for student in students_data:
+        if student["id"] == student_id:
+            students_data.remove(student)
+            print("Student deleted successfully!")
+            break
+    else:
+        print("Student not found!")
+# Main Menu
+while True:
+    print("\n===== Student Management System =====")
+    print("1. Add Student")
+    print("2. Display Students")
+    print("3. Search Student")
+    print("4. Update Student")
+    print("5. Delete Student")
+    print("6. Exit")
+
+    choice = int(input("Enter your choice: "))
+    if choice == 1:
+        add_student()
+    elif choice == 2:
+        display_student()
+    elif choice == 3:
+        search_student()
+    elif choice == 4:
+        update_student()
+    elif choice == 5:
+        delete_student()
+    elif choice == 6:
+        print("Program closed.")
+        break
+    else:
+        print("Invalid choice!")
