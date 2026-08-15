@@ -108,3 +108,120 @@ df = pd.read_excel("students.xlsx")
 df = pd.read_json("students.json")
 print(df)
 
+# ==========================================
+# Pandas CSV File Operations
+# ==========================================
+import pandas as pd
+df = pd.read_csv("datasets/students_pandas_practice.csv")
+
+#--------------------operations---------------------
+# Display complete DataFrame
+print(df)
+# First 5 rows display--------
+print(df.head())
+# Last 5 rows display-------------
+print(df.tail())
+# Number of rows and columns----------------
+print(df.shape)
+# Column names------------------
+print(df.columns)
+# Data types-------------
+print(df.dtypes)
+# Complete information----------
+print(df.info())
+#summary of file---------
+print(df.describe())
+#-------------------------------data filter-----------------------------
+print(df[df["Marks"] >= 90])     #condition apply filter results
+print(df[df["City"] == "Lahore"])        #specific city 
+print(df[(df["Marks"] > 80) & (df["Attendance"] > 75)])        #multiple conditions 
+# for AND = &     for or =  |
+print(df[df["City"].isin(["Lahore", "Okara", "Multan"])])        #for multiple valus .isin
+print(df[df["Age"].between(20, 22)])     #b/w
+
+print(df[df["Marks"]< 60])
+
+#--------------------------updateeeee-----------------------------
+df.loc[0, "Marks"] = 95
+print(df.loc[0])
+
+df.loc[df["Marks"] < 50, "Marks"] = 50                 #condition 
+df.loc[0, ["Age", "Marks"]] = [21, 90]          #multiple columns 
+#--------------------rename----------------------
+df.rename(columns={"Marks": "Total_Marks"}, inplace=True)
+
+df.rename(       #multiple --------------------------
+    columns={
+        "Name": "Student_Name",
+        "Age": "Student_Age"
+    },
+    inplace=True
+)
+
+
+#-------------------------delete----------------------------
+df.drop("Fee", axis=1, inplace=True)          # axis =column
+#      inplace=True ka matlab original DataFrame ko directly change krna
+df.drop(5, axis=0, inplace=True)                #axis row
+
+
+
+#-------------------- SORTING---------------------
+df.sort_values("Marks")
+df.sort_values(
+    "Marks",  
+    ascending=False          #ascending 
+)
+# ------------------------MULTIPLE SORT
+df.sort_values(
+    ["Department", "Marks"],
+    ascending=[True, False]
+)
+# ------------------------------MISSING VALUES
+df.isnull()
+df.isnull().sum()
+#------------------- Rows containing missing values
+df[df.isnull().any(axis=1)]
+# -------------------Remove missing rows
+df.dropna()
+#------------------- Fill missing values
+df.fillna("Unknown")
+#------------------------ Fill numerical missing values with mean
+df["Marks"] = df["Marks"].fillna(
+    df["Marks"].mean()
+)
+
+print(df.duplicated())  #duplicate check
+print(df.duplicated().sum())          #total duplicate
+df.drop_duplicates()                  #duplicate remove
+df.drop_duplicates(inplace=True)           #Permanent delete
+
+#functions use --------------apply()
+def add_bonus(marks):
+    return marks + 5
+df["New_Marks"] = df["Marks"].apply(add_bonus)
+print(df[["Marks", "New_Marks"]])
+
+#---------with lamda 
+df["New_Marks"] = df["Marks"].apply(
+    lambda x: x + 5
+)
+
+df["Double_Marks"] = df["Marks"].apply(
+    lambda x: x * 2
+)
+
+df["New_Age"] = df["Age"].apply(
+    lambda x: x + 1
+)
+#grading--------------------
+df["New_Grade"] = df["Marks"].apply(
+    lambda x:
+    "A+" if x >= 90
+    else "A" if x >= 80
+    else "B" if x >= 70
+    else "C" if x >= 60
+    else "F"
+)
+
+#join  same as databases=---
